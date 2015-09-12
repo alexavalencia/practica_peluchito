@@ -1,6 +1,8 @@
 
 package practica_peluchito;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Contabilidad {
     Scanner scanf = new Scanner(System.in);
@@ -61,11 +63,20 @@ public class Contabilidad {
     
      
      public void Agregar_P(){ // agrega los productos a la lista
-     
+        boolean auxi;
         System.out.print("Nombre del producto:    ");
         producto=scanf.nextLine();
+        Pattern patron = Pattern.compile("[^A-Za-z ]");
+        Matcher cadena = patron.matcher(producto);
+        while(cadena.find()){
+            System.out.println("Palabra invalida...");
+            System.out.print("Nombre del producto:    ");
+            producto=scanf.nextLine();
+            cadena = patron.matcher(producto);
+        }
         System.out.print("Cantidad de producto que ingresa:    ");
         cantidad=scanf.nextInt();
+        
         System.out.print("Valor individual del producto:    ");
         precio=scanf.nextInt();
      
@@ -84,7 +95,7 @@ public class Contabilidad {
          cantidad=0;
          precio=0;
          venta=0;
-        total_venta=0;
+         total_venta=0;
      }
      
      public void RealizarVentas(){
@@ -108,7 +119,7 @@ public class Contabilidad {
          
          System.out.println("La cantidad de ventas de "+producto+" es: "+ venta);
          total_venta=venta*precio;
-         System.out.println("El total de la venta de: "+ producto +" es: "+total_venta);
+         System.out.println("El total de la venta de "+ producto +" es: "+total_venta);
          
      
      }

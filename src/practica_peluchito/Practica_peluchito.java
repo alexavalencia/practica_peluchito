@@ -2,7 +2,8 @@
 package practica_peluchito;
 
 import java.util.Scanner;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Practica_peluchito {
 
@@ -11,6 +12,8 @@ public class Practica_peluchito {
         int op=0;
         int a=1,cont=0;
         String data;
+        Pattern patron = Pattern.compile("[^A-Za-z ]");
+         Matcher cadena;
         int flag,auxi2,flag1=0;
         double total=0;
         Scanner scanf= new Scanner(System.in);
@@ -52,6 +55,13 @@ public class Practica_peluchito {
                     auxi2=0;
                     System.out.print("Nombre del producto: ");
                     data=scanf.next();
+                    cadena = patron.matcher(data);
+                     while(cadena.find()){
+                        System.out.println("Palabra invalida...");
+                        System.out.print("Nombre del producto:    ");
+                        data=scanf.next();
+                        cadena = patron.matcher(data);
+                    }
                     for(int i=0; i<cont; i++){
                         flag=data.compareTo(Producto[i].getProducto());
                         if(flag==0){
@@ -75,6 +85,13 @@ public class Practica_peluchito {
                     auxi2=0;
                     System.out.print("Nombre del producto: ");
                     data=scanf.next();
+                    cadena = patron.matcher(data);
+                     while(cadena.find()){
+                        System.out.println("Palabra invalida...");
+                        System.out.print("Nombre del producto:    ");
+                        data=scanf.next();
+                        cadena = patron.matcher(data);
+                    }
                     for(int i=0; i<cont; i++){
                         flag=data.compareTo(Producto[i].getProducto());
                         if(flag==0){
@@ -90,9 +107,11 @@ public class Practica_peluchito {
                             Producto[u]=Producto[u+1];
                         }
                        cont=cont-1; 
+                       System.out.println("El producto se ha eliminado correctamente...");
                      }else{
                         Producto[flag1]=null;
                         cont=cont-1;
+                        System.out.println("El producto se ha eliminado correctamente...");
                     }
                      if(auxi2!=1){
                          System.out.println("El producto no existe ");
@@ -100,15 +119,26 @@ public class Practica_peluchito {
                     break;
                 case 4:
                     a=1;
-                    for(int j=0; j<cont; j++){
-                        Producto[j].Buscar_P();
-                    }
+                    if(cont==0){
+                        System.out.println("No hay productos registrados en la base de datos");
+                    }else{
+                        for(int j=0; j<cont; j++){
+                            Producto[j].Buscar_P();
+                           }
+                    }    
                     break;
                 case 5:
                     a=1;
                      auxi2=0;
                     System.out.print("Nombre del producto: ");
                     data=scanf.next();
+                    cadena = patron.matcher(data);
+                    while(cadena.find()){
+                        System.out.println("Palabra invalida...");
+                        System.out.print("Nombre del producto:    ");
+                        data=scanf.next();
+                        cadena = patron.matcher(data);
+                    }
                     for(int i=0; i<cont; i++){
                         flag=data.compareTo(Producto[i].getProducto());
                         if(flag==0){
